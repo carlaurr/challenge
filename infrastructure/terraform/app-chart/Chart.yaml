@@ -1,0 +1,5 @@
+apiVersion: v2
+name: app-chart
+description: A Helm chart for deploying the app with an nginx ingress
+version: 1.0.0
+appVersion: "1.0.0"
