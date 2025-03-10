@@ -5,3 +5,19 @@ metadata:
   namespace: {{ .Values.namespace }}
 spec:
   selfSigned: {}
+
+---
+
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: challenge-cert
+  namespace: challenge
+spec:
+  secretName: challenge-tls
+  issuerRef:
+    name: selfsigned-issuer
+    kind: ClusterIssuer
+  commonName: {{ .Values.hostname }}
+  dnsNames:
+    - {{ .Values.hostname }}

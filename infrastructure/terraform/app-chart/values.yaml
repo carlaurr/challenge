@@ -10,13 +10,4 @@ service:
   containerPort: 8080
 
 namespace: "challenge"
-
-ingress:
-  enabled: true
-  hosts:
-    - host: "challenge.local"
-      paths:
-        - path: "/"
-          backend:
-            serviceName: "app"
-            servicePort: 80
+hostname: "challenge.local"
