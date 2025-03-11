@@ -15,6 +15,13 @@ spec:
       labels:
         app: {{ .Release.Name }}
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app: {{ .Release.Name }}
+              topologyKey: kubernetes.io/hostname
       containers:
         - name: {{ .Release.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
