@@ -2,7 +2,7 @@ replicaCount: 3
 
 image:
   repository: "ghcr.io/carlaurr/challenge"
-  tag: "latest"
+  tag: 3943a5e
 
 service:
   port: 8080
