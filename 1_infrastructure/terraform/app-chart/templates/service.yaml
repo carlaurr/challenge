@@ -3,6 +3,11 @@ kind: Service
 metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Values.namespace }}
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: "/metrics"
+    prometheus.io/port: "8080"
+    # cloud.google.com/neg: '{"ingress": true}'
   labels:
     app: {{ .Release.Name }}
 spec:
@@ -11,4 +16,5 @@ spec:
   ports:
     - port: {{ .Values.service.port }}
       targetPort: {{ .Values.service.ContainerPort }}
+  # type: ClusterIP
   type: NodePort
