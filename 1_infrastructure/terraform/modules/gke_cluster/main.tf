@@ -17,6 +17,13 @@ resource "google_container_node_pool" "nodes" {
   cluster    = google_container_cluster.primary.name
   node_count = var.gke_num_nodes
 
+  # Specify multiple zones where the nodes will be distributed
+  node_locations = [
+    "${var.region}-a",
+    "${var.region}-b",
+    "${var.region}-c"
+  ]
+
   node_config {
     preemptible  = var.gke_nodes_preemptible
     machine_type = var.gke_nodes_machine_type
