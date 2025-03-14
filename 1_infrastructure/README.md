@@ -27,7 +27,7 @@ The application Kubernete resources are defined in a Helm chart. This approach m
 
 ## Monitoring Stack
 The proposed basic monitoring stack is to use Prometheus to collect metrics from the GKE cluster and applications and Grafana to visualize the metrics.  
-To deploy these componene we can use the corresponding Helm chart. 
+To deploy these components we can use the corresponding Helm charts. 
 
 Prometheus will discover and scrape our application automatically thanks to adding the prometheus annotations:
 ```yaml
@@ -36,9 +36,9 @@ Prometheus will discover and scrape our application automatically thanks to addi
   prometheus.io/port: "8080"
 ```
 
-> Note: The current Golang server doesn't yer expose metric. To allow prometheus to scrape app metrics, we need to explose them in a `/metrics` endpoint. We can use [Prometheus Go client][prom-go-client] to do it.
+> Note: The current Golang server doesn't yet expose metric. To allow prometheus to scrape app metrics, we need to expose them in a `/metrics` endpoint. We can use [Prometheus Go client][prom-go-client] to do it.
 
-## Auto-scaling policies based on custom metrics
+## Auto-scaling Policies Based on Custom Metrics
 
 To define auto-scaling policies basen on custom metrics or kubernetes resources metrics, we can use the Horizontal Pod Autoscaler (HPA).
 
@@ -46,13 +46,13 @@ The `app-chart` configures the HPA to scale the application based on the CPU, me
 
 To make it possible, it's required to have in the cluster a [Prometheus Adapter][prom-adapter-helm-chart] that exposes our app metrics to Kubernetes via Custom Metrics API. This way, the horizontal pod autoscaler can scale the application based on the custom metric. 
 
-## Future considerations
+## Future Considerations
 
-- Although is not implementes in the current setup, the deployment of the Terraform code should be automated using a CI/CD pipeline to ensure that the infrastructure is always up-to-date and consistent with the code. Terraform state file should be stored in a remote backend (e.g. GCS) to allow collaboration and state locking.
+- Although is not implemented in the current setup, the deployment of the Terraform code should be automated using a CI/CD pipeline to ensure that the infrastructure is always up-to-date and consistent with the code. Terraform state file should be stored in a remote backend (e.g. GCS) to allow collaboration and state locking.
 
 - Terraform modules should be versioned and published to a registry to allow reusability across different projects. Additionally, they should include documentation, examples and tests (using Terratest, for example).
 
-- Move the monitoring stack to a separate cluster to better manage the resources and improve the reliability and metrics access in case one of the regios fails.
+- Move the monitoring stack to a separate cluster to better manage the resources and improve the reliability and metrics access in case one of the regions fails.
 
 - Depending on the requirements of the application and other workloads, we should consider if it's better to use an active-active or active-passive setup on multi-region clusters. In the first case, RTO and RPO are lower but it's more complex to manage and expensive. In the second case, the failover is slower but it's easier to manage and cheaper.
 

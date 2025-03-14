@@ -86,7 +86,7 @@ spec:
             - containerPort: 8080
 ```
 
-Apart from that, using ArgoRollouts UI or CLI we can monitor the rollout, see the progress and make a manual promotion or rollback if needed.
+Apart from that, using ArgoRollouts UI or CLI, we can monitor the rollout, see the progress and make a manual promotion or rollback if needed.
 
 ### Automated Rollback Strategies
 ArgoRollouts will be also used to implement the automated rollback strategies. In case of failure, the rollout will be automatically rolled back to the previous version.
@@ -114,6 +114,8 @@ spec:
             sum(rate(http_requests_total{job="my-app",status=~"5.."}[5m])) /
             sum(rate(http_requests_total{job="my-app"}[5m]))
 ```
+
+## Solution Diagram
 
 ![CI/CD diagram](./img/cicd.png)
 

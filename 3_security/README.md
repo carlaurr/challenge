@@ -9,8 +9,8 @@ The core idea of a Zero Trust architecture is to never trust and always verify. 
 ### Requests
 Incoming requests to the Golang server should be authenticated (using JWT tokens, for example) and authorized. The server should validate who is making the requests and if they have the right permissions to access the resources or make a certain action.
 
-If in the future more services are added to the architecture, the internal communications between them should alse be protected using a service-to-service authentication and authorizations mechanism.  
-We can use a service mesh such as Istio or Linkerd to implement mTLS, encrypting the inter-service traffic and verifying that only the allowed services can communicate with each other. This way, we are not assuming implicit trust inside the network, preventing attacks in case one of the services is compromised.
+If additional services are added in the future, internal communications between them should alse be protected using a service-to-service authentication and authorizations mechanism.  
+We can use a service mesh, such as Istio or Linkerd, to implement mTLS, encrypting the inter-service traffic and verifying that only the allowed services can communicate with each other. This way, we are not assuming implicit trust inside the network, preventing attacks in case one of the services is compromised.
 
 ### RBAC in Kubernetes
 Role-based access control is used in Kubernetes to prevent that unhautorized users or service accounts can access the resources in the cluster. We should define roles and role bindings to grant the minimum permissions required to perform the actions needed.
@@ -50,8 +50,8 @@ Between all the configurations that can be done in a WAF, the most important are
 
 ## Audit Logging
 
-In architecture proposed in this challenge is composed by different components and tools (GCP, Kubernetes, GitHub, ArgoCD, ArgoRollouts and the applications deploted by us). It's important to have audit logs enabled in all of them to trach all the actions performed by users and services. If a malicious actor gains access to one of the tools, the audit logs will help us to detect the intrusion and take actions to mitigate the impact.
+In architecture proposed in this challenge is composed by different components and tools (GCP, Kubernetes, GitHub, ArgoCD, ArgoRollouts and the applications deploted by us). It's important to have audit logs enabled in all of them to track all the actions performed by users and services. If a malicious actor gains access to one of the tools, the audit logs will help us to detect the intrusion and take actions to mitigate the impact.
 
-Having all the logs scattered in different places can be a mess and dificult the analysis of them in case of an incident. In our case, it would be recommended to centralize all the logs in a single place, such as Loki or Google Cloud Logging. ArgoCD, kuberenetes and GitHub audit logs can be ingested in any of these solutions.
+Having all the logs scattered in different places can be a mess and dificults the analysis of them in case of an incident. In our case, it would be recommended to centralize all the logs in a single place, such as Loki or Google Cloud Logging. ArgoCD, Kubernetes and GitHub audit logs can be ingested in any of these solutions.
 
 [psa-standards]: https://kubernetes.io/docs/concepts/security/pod-security-standards/
