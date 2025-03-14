@@ -38,3 +38,13 @@ variable "gke_nodes_preemptible" {
   type        = bool
   default     = true
 }
+
+variable "vpc_id" {
+  description = "VPC network id where the GKE cluster will be created"
+  type        = string
+}
+
+variable "subnet_id" {
+  description = "Subnet id where the GKE cluster will be created"
+  type        = string
+}

@@ -1,13 +1,16 @@
 name: Challenge App CI/CD
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
+    paths:
+      - 'app/**'
   pull_request:
     branches:
       - main
+    paths:
+      - 'app/**'
 
 permissions:
   contents: write
@@ -58,6 +61,7 @@ jobs:
             .
 
       - name: Update Helm Chart
+        if: github.ref == 'refs/heads/main'
         run: |
           sed -i 's|tag: .*|tag: '"$IMAGE_TAG"'|' ${{ env.APP_CHART_VALUES_PATH }}
 

@@ -1,7 +1,7 @@
 output "vpc_id" {
-  value = aws_vpc.main.id
+  value = google_compute_network.global_vpc.id
 }
 
 output "subnet_ids" {
-  value = aws_subnet.private.*.id
+  value = google_compute_subnetwork.subnet.*.id
 }
